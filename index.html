@@ -6,7 +6,7 @@
   <title>출국 전 마지막 체크리스트</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    
+
     body {
       background-color: #f2f4f6;
       font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -52,11 +52,10 @@
     .header-title { font-size: 14px; font-weight: 700; color: #191f28; }
     .header-title span { color: #b0b8c1; font-weight: 400; margin: 0 4px; }
 
-    /* 단계별 화면 제어 */
     .step-view { display: none; width: 100%; }
     .step-view.active { display: block; }
 
-    /* [STEP 1] 본문 - 인트로 (화면 정중앙 정렬 보완) */
+    /* STEP 1 */
     .intro-container {
       position: fixed;
       top: 70px;
@@ -86,7 +85,6 @@
     }
 
     .intro-title { font-size: 24px; font-weight: 800; line-height: 1.45; margin-bottom: 16px; animation: fadeInText 0.8s ease-out forwards; }
-    /* 가독성 개선: 15px -> 16px */
     .intro-desc { font-size: 16px; color: #4e5968; line-height: 1.6; margin-bottom: 40px; }
     .progress-track { width: 200px; height: 4px; background: #e5e8eb; border-radius: 2px; overflow: hidden; }
     .progress-fill { width: 0%; height: 100%; background: #3182f6; border-radius: 2px; animation: fillBar 3s linear forwards; }
@@ -94,49 +92,204 @@
     @keyframes fillBar { to { width: 100%; } }
     @keyframes fadeInText { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* [STEP 2] 본문 - 메인화면 및 [STEP 7] 결과화면 공통 레이아웃 마진 */
+    /* STEP 2 */
     .main-container { padding-bottom: 180px; }
 
-    .hero { padding: 40px 24px 24px; background: linear-gradient(180deg, #f0f7ff 0%, #ffffff 100%); }
-    .d-day { display: inline-block; color: #3182f6; background: #e8f3ff; padding: 6px 12px; border-radius: 8px; font-size: 14px; font-weight: 700; margin-bottom: 16px; }
-    .hero-title { font-size: 28px; font-weight: 800; line-height: 1.4; }
+    .hero {
+      padding: 40px 24px 24px;
+      background: linear-gradient(180deg, #f0f7ff 0%, #ffffff 100%);
+    }
 
-    .checklist-card { margin: 0 24px 16px; padding: 20px 24px; background: #f9fafb; border-radius: 20px; }
-    .check-item { display: flex; align-items: center; padding: 10px 0; font-size: 16px; font-weight: 600; color: #8b95a1; }
-    /* 구형 시스템 호환: gap 대신 margin 우회 적용 */
-    .check-item :first-child { margin-right: 12px; } 
-    .check-item.active { color: #191f28; background: #ffffff; margin: 6px -12px; padding: 14px 16px; border-radius: 14px; box-shadow: 0 4px 16px rgba(49, 130, 246, 0.08); border: 2px solid #3182f6; }
+    .d-day {
+      display: inline-block;
+      color: #3182f6;
+      background: #e8f3ff;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
 
-    .bridge-card { margin: 0 24px 24px; padding: 22px 24px; background: linear-gradient(135deg, #ffffff 0%, #f4f8ff 100%); border-radius: 20px; border: 1px solid #e8f3ff; }
-    .bridge-title { font-size: 17px; font-weight: 800; color: #191f28; margin-bottom: 8px; }
-    /* 가독성 개선: 14px -> 15px */
-    .bridge-desc { font-size: 15px; color: #4e5968; line-height: 1.6; }
-    .bridge-desc b { color: #3182f6; }
+    .hero-title {
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1.4;
+      margin-bottom: 12px;
+    }
 
-    /* 퀴즈 화면 스타일 */
+    .hero-sub {
+      font-size: 15px;
+      color: #4e5968;
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+
+    .hero-sub b {
+      color: #3182f6;
+    }
+
+    .hero-hashtags {
+      font-size: 13px;
+      font-weight: 700;
+      color: #6b7684;
+      line-height: 1.6;
+      margin-bottom: 8px;
+      word-break: keep-all;
+    }
+
+    .checklist-card {
+      margin: 0 24px 16px;
+      padding: 20px 24px;
+      background: #f9fafb;
+      border-radius: 20px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: center;
+      padding: 10px 0;
+      font-size: 16px;
+      font-weight: 600;
+      color: #8b95a1;
+    }
+
+    .check-item :first-child { margin-right: 12px; }
+
+    .check-item.active {
+      color: #191f28;
+      background: #ffffff;
+      margin: 6px -12px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      box-shadow: 0 4px 16px rgba(49, 130, 246, 0.08);
+      border: 2px solid #3182f6;
+    }
+
+    .quick-check-card {
+      margin: 0 24px 24px;
+      padding: 20px 20px 18px;
+      background: #ffffff;
+      border: 1px solid #e5e8eb;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.03);
+    }
+
+    .quick-check-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .quick-check-badge {
+      display: inline-block;
+      background: #eef6ff;
+      color: #3182f6;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 6px 10px;
+      border-radius: 999px;
+    }
+
+    .quick-check-time {
+      font-size: 13px;
+      color: #6b7684;
+      font-weight: 700;
+    }
+
+    .quick-check-title {
+      font-size: 18px;
+      font-weight: 800;
+      line-height: 1.45;
+      color: #191f28;
+      margin-bottom: 14px;
+    }
+
+    .quick-check-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .quick-check-item {
+      display: flex;
+      align-items: flex-start;
+      background: #f9fafb;
+      border-radius: 14px;
+      padding: 13px 14px;
+    }
+
+    .quick-check-icon {
+      font-size: 16px;
+      margin-right: 10px;
+      margin-top: 1px;
+      flex-shrink: 0;
+    }
+
+    .quick-check-text {
+      font-size: 14px;
+      line-height: 1.55;
+      color: #4e5968;
+    }
+
+    .quick-check-text b {
+      color: #191f28;
+    }
+
+    /* QUIZ */
     .quiz-container { padding: 32px 24px 180px; }
     .quiz-progress { font-size: 14px; font-weight: 700; color: #3182f6; margin-bottom: 16px; }
     .quiz-card { background: #f9fafb; border-radius: 20px; padding: 24px; margin-bottom: 20px; border: 1px solid #f2f4f6; }
     .quiz-question { font-size: 18px; font-weight: 700; line-height: 1.5; margin-bottom: 24px; color: #191f28; }
-    
+
     .btn-group { display: flex; }
-    .quiz-btn { 
-      flex: 1; border: 1px solid #d1d6db; background: #ffffff; padding: 18px; border-radius: 12px; font-size: 18px; font-weight: 700; color: #4e5968; cursor: pointer; transition: all 0.2s ease; 
-      -webkit-tap-highlight-color: transparent; -webkit-user-select: none; user-select: none;
+    .quiz-btn {
+      flex: 1;
+      border: 1px solid #d1d6db;
+      background: #ffffff;
+      padding: 18px;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: 700;
+      color: #4e5968;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-user-select: none;
+      user-select: none;
     }
-    /* 구형 브라우저 호환: gap 대신 마진 분리 */
+
     .quiz-btn:first-child { margin-right: 12px; }
     .quiz-btn.selected { background: #3182f6; color: white; border-color: #3182f6; }
     .quiz-btn.wrong-select { background: #f2f4f6; color: #b0b8c1; border-color: #e5e8eb; }
-    
-    /* 가독성 개선: 15px -> 16px */
-    .explanation { display: none; margin-top: 20px; padding-top: 20px; border-top: 1px dashed #e5e8eb; font-size: 16px; line-height: 1.65; color: #4e5968; }
-    /* 가독성 개선: 16px -> 17px */
-    .explanation b { color: #3182f6; display: block; font-size: 17px; margin-bottom: 6px; }
-    .explanation mark { background-color: #e8f3ff; color: #3182f6; font-weight: 700; padding: 2px 4px; }
 
-    /* 결과 분석 로딩 화면 */
-    .loading-container { 
+    .explanation {
+      display: none;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px dashed #e5e8eb;
+      font-size: 16px;
+      line-height: 1.65;
+      color: #4e5968;
+    }
+
+    .explanation b {
+      color: #3182f6;
+      display: block;
+      font-size: 17px;
+      margin-bottom: 6px;
+    }
+
+    .explanation mark {
+      background-color: #e8f3ff;
+      color: #3182f6;
+      font-weight: 700;
+      padding: 2px 4px;
+    }
+
+    /* LOADING */
+    .loading-container {
       height: calc(100vh - 70px);
       display: flex;
       flex-direction: column;
@@ -146,13 +299,27 @@
       background: #ffffff;
       text-align: center;
     }
-    .spinner { width: 48px; height: 48px; border: 4px solid #f3f3f3; border-top: 4px solid #3182f6; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 24px; }
-    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+    .spinner {
+      width: 48px;
+      height: 48px;
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #3182f6;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 24px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
     .loading-text { font-size: 18px; font-weight: 700; color: #191f28; line-height: 1.6; }
     .loading-sub-text { font-size: 14px; color: #8b95a1; margin-top: 8px; }
 
-    /* STEP 7. 최종 결과 화면 */
-    .result-container { padding: 16px 20px 20px; width: 100%; } 
+    /* RESULT */
+    .result-container { padding: 16px 20px 20px; width: 100%; }
     .result-header-compact { background: #f0f7ff; border-radius: 16px; padding: 20px; margin-bottom: 20px; border: 1px solid #e8f3ff; text-align: center; }
     .result-score-block { display: inline-flex; align-items: center; background: #ffffff; padding: 4px 12px; border-radius: 20px; box-shadow: 0 2px 8px rgba(49, 130, 246, 0.05); margin-bottom: 12px; }
     .result-score-badge { font-size: 12px; font-weight: 700; color: #3182f6; margin-right: 8px; }
@@ -160,70 +327,135 @@
     .result-grade-title { font-size: 22px; font-weight: 800; color: #3182f6; margin-bottom: 6px; }
     .result-grade-desc { font-size: 14px; color: #4e5968; line-height: 1.5; max-width: 480px; margin: 0 auto; }
 
-    /* 가이드 리스트 컴팩트 스타일 및 설명 추가 패치 */
     .section-title-compact { font-size: 15px; font-weight: 800; color: #191f28; margin-bottom: 4px; padding-left: 4px; }
-    /* 가독성 개선: 13px -> 14px */
     .section-desc-compact { font-size: 14px; color: #6b7684; margin-bottom: 14px; padding-left: 4px; line-height: 1.4; }
     .solution-list-compact { display: flex; flex-direction: column; margin-bottom: 24px; }
-    
+
     .sol-row { display: flex; align-items: flex-start; background: #f9fafb; padding: 14px 16px; border-radius: 14px; border: 1px solid #f2f4f6; margin-bottom: 10px; }
     .sol-row:last-child { margin-bottom: 0; }
     .sol-row-icon { font-size: 18px; margin-right: 12px; margin-top: 2px; }
     .sol-content-box { display: flex; flex-direction: column; }
-    /* 가독성 개선: 14px -> 15px */
     .sol-row-text { font-size: 15px; font-weight: 700; color: #333d4b; margin-bottom: 3px; }
-    /* 가독성 개선: 12px -> 13px */
     .sol-row-subtext { font-size: 13px; color: #6b7684; line-height: 1.4; }
 
-    /* 하단 공통 혜택 컴포넌트 */
-    .reward-footer-optimized { background: linear-gradient(180deg, #f9fafb 0%, #ffffff 100%); padding: 24px 20px; border-radius: 20px; text-align: center; border: 1px solid #e5e8eb; margin: 0 24px 24px; }
-    .result-container .reward-footer-optimized { margin: 24px 0 0; } 
-    
-    .tw-badge { display: inline-block; background: #e8f3ff; color: #3182f6; font-size: 13px; font-weight: 700; padding: 6px 14px; border-radius: 6px; margin-bottom: 12px; }
-    /* 인라인 스타일 분리 및 가독성 개선 (15px -> 16px) */
+    /* BENEFIT */
+    .reward-footer-optimized {
+      background: linear-gradient(180deg, #f9fafb 0%, #ffffff 100%);
+      padding: 24px 20px;
+      border-radius: 20px;
+      text-align: center;
+      border: 1px solid #e5e8eb;
+      margin: 0 24px 24px;
+    }
+
+    .result-container .reward-footer-optimized { margin: 24px 0 0; }
+
+    .tw-badge {
+      display: inline-block;
+      background: #e8f3ff;
+      color: #3182f6;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 6px;
+      margin-bottom: 12px;
+    }
+
     .reward-sub-title { font-size: 16px; font-weight: 600; color: #4e5968; margin-bottom: 4px; }
     .reward-cash { font-size: 20px; font-weight: 800; color: #3182f6; margin-bottom: 12px; }
-    
-    .npay-card-wrapper { margin: 12px auto; width: 220px; height: 110px; background: linear-gradient(135deg, #03cf5d 0%, #02b34f 100%); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; justify-content: space-between; text-align: left; }
-    .npay-logo { color: #ffffff; font-size: 18px; font-weight: 900; display: flex; align-items: center; }
-    .npay-logo span { background: #ffffff; color: #03cf5d; font-size: 10px; font-weight: 800; padding: 1px 4px; border-radius: 3px; margin-left: 4px; }
+
+    .npay-card-wrapper {
+      margin: 12px auto;
+      width: 220px;
+      height: 110px;
+      background: linear-gradient(135deg, #03cf5d 0%, #02b34f 100%);
+      border-radius: 14px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: left;
+    }
+
+    .npay-logo {
+      color: #ffffff;
+      font-size: 18px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+    }
+
+    .npay-logo span {
+      background: #ffffff;
+      color: #03cf5d;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 1px 4px;
+      border-radius: 3px;
+      margin-left: 4px;
+    }
+
     .npay-value { color: #ffffff; text-align: right; }
     .npay-card-info { font-size: 11px; opacity: 0.8; display: block; margin-bottom: 2px; }
     .npay-value .val-num { font-size: 20px; font-weight: 800; }
-    /* 가독성 개선: 11px -> 13px */
     .reward-condition-text { font-size: 13px; color: #8b95a1; margin-top: 4px; }
 
-    .event-notice { margin-top: 16px; padding: 14px; background: #ffffff; border: 1px solid #e5e8eb; border-radius: 10px; text-align: left; }
-    /* 가독성 개선: 13px -> 14px */
-    .event-notice-title { font-size: 14px; font-weight: 700; color: #4e5968; margin-bottom: 6px; }
-    /* 가독성 개선: 12px -> 12.5px */
-    .event-notice-text { font-size: 12.5px; line-height: 1.6; color: #8b95a1; }
+    .event-notice {
+      margin-top: 16px;
+      padding: 14px;
+      background: #fcfcfd;
+      border: 1px solid #eef1f4;
+      border-radius: 10px;
+      text-align: left;
+    }
 
-    /* 하단 고정 바: 구형 하이브리드 엔진 대응 디폴트 여백 선언 */
-    .sticky-cta { 
-      position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 680px; 
-      padding: 16px 24px 34px; 
-      padding-bottom: calc(16px + env(safe-area-inset-bottom)); 
-      background: linear-gradient(to top, #ffffff 85%, rgba(255,255,255,0) 100%); z-index: 110; 
+    .event-notice-title { font-size: 13px; font-weight: 700; color: #6b7684; margin-bottom: 6px; }
+    .event-notice-text { font-size: 12px; line-height: 1.6; color: #8b95a1; }
+
+    /* CTA */
+    .sticky-cta {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 680px;
+      padding: 16px 24px 34px;
+      padding-bottom: calc(16px + env(safe-area-inset-bottom));
+      background: linear-gradient(to top, #ffffff 85%, rgba(255,255,255,0) 100%);
+      z-index: 110;
     }
-    
-    .btn-main { 
-      width: 100%; background: #3182f6; color: white; border: none; padding: 20px; border-radius: 16px; font-size: 16px; font-weight: 700; cursor: pointer; box-shadow: 0 8px 24px rgba(49, 130, 246, 0.2); 
-      -webkit-tap-highlight-color: transparent; -webkit-user-select: none; user-select: none;
+
+    .btn-main {
+      width: 100%;
+      background: #3182f6;
+      color: white;
+      border: none;
+      padding: 20px;
+      border-radius: 16px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(49, 130, 246, 0.2);
+      -webkit-tap-highlight-color: transparent;
+      -webkit-user-select: none;
+      user-select: none;
     }
+
     .btn-main:disabled { background: #b0b8c1; box-shadow: none; cursor: not-allowed; }
   </style>
 </head>
 <body>
 
   <div class="page-container">
-    
+
     <header class="app-header">
       <button class="header-back" type="button" onclick="goBack()">←</button>
-      <div class="header-title">수호천사 동양생명1 <span>✕</span> Travel Wallet</div>
-      <button class="header-share" type="button">📤</button>
+      <div class="header-title">수호천사 동양생명 <span>✕</span> Travel Wallet</div>
+      <button class="header-share" type="button"> </button>
     </header>
 
+    <!-- STEP 1 -->
     <div id="view-intro" class="step-view active">
       <div class="intro-container">
         <div class="airplane-stage">
@@ -237,27 +469,51 @@
       </div>
     </div>
 
+    <!-- STEP 2 MAIN -->
     <div id="view-main" class="step-view">
       <div class="main-container">
         <div class="hero">
-          <span class="d-day">✈️ 출국 전 필수 체크</span>
-          <h1 class="hero-title">고객님, 출국 전 마지막<br>체크리스트를 확인하세요!</h1>
+          <span class="d-day">✈️ 출국 전 안심 체크</span>
+          <h1 class="hero-title">여행 전 필수 체크!<br>나의 안심점수 확인하기</h1>
+          <p class="hero-sub">
+            해외여행보험도 가입하고 여행비 환전도 끝내셨나요? <br>그렇다면 여행의 마지막 준비! <b>나의 안심여행 지수 확인</b>하고 더 안심되는 여행을 준비해보세요.
+          </p>
+          <p class="hero-hashtags">#해외여행보험필수체크 #출국전안심점수확인 #트래블월렛특별혜택</p>
         </div>
+
         <div class="checklist-card">
           <div class="check-item">✅&nbsp;&nbsp;해외여행보험 가입 완료</div>
-          <div class="check-item">✅&nbsp;&nbsp;여행 자금 환전 완료</div>
+          <div class="check-item">✅&nbsp;&nbsp;여행비 환전 완료</div>
           <div class="check-item active">🔲&nbsp;&nbsp;안심여행 지수 확인하기✨</div>
         </div>
-        <div class="bridge-card">
-          <p class="bridge-title">✨ 완벽한 여행을 위한 마지막 안심 진단</p>
-          <p class="bridge-desc">안전하고 즐거운 여행을 위해 <b>출국 전 '안심여행 지수'</b>를 꼭 확인해 보세요. <br>참여해 주신 분들께는<b>트래블월렛 고객 전용 특별 혜택</b>을 드립니다.</p>
+
+        <div class="quick-check-card">
+          <div class="quick-check-top">
+            <span class="quick-check-badge">빠른 안심 체크</span>
+            <span class="quick-check-time">약 1분 소요</span>
+          </div>
+          <p class="quick-check-title">간단한 상식 퀴즈로,<br>출국 전 나의 안심점수를 확인해보세요</p>
+          <div class="quick-check-list">
+            <div class="quick-check-item">
+              <span class="quick-check-icon">📝</span>
+              <p class="quick-check-text"><b>보험금 청구 팁 체크</b> <br> 해외여행보험 보험금 청구 시 미리 알아둘 핵심 포인트 확인</p>
+            </div>
+            <div class="quick-check-item">
+              <span class="quick-check-icon">🔍</span>
+              <p class="quick-check-text"><b>나의 보장 공백 체크</b> <br> 여행 중은 물론 귀국 후까지 생각한 보장 빈틈 확인</p>
+            </div>
+            <div class="quick-check-item">
+              <span class="quick-check-icon">💰</span>
+              <p class="quick-check-text"><b>보험료 환급 체크</b> <br> 모르고 지나치기 쉬운 실손보험료 환급 대상 여부 확인</p>
+            </div>
+          </div>
         </div>
 
         <div class="reward-footer-optimized">
           <span class="tw-badge">트래블월렛 고객 특별 혜택! ✨</span>
-          <p class="reward-sub-title">수호천사 안심여행 가이드를 받으면</p>
+          <p class="reward-sub-title">수호천사 안심여행 가이드를 신청하면</p>
           <p class="reward-cash">여행지원금 10,000원 지급</p>
-          
+
           <div class="npay-card-wrapper">
             <div class="npay-logo">N Pay<span>포인트</span></div>
             <div class="npay-value">
@@ -265,20 +521,26 @@
               <span class="val-num">10,000 원</span>
             </div>
           </div>
+
           <p class="reward-condition-text">(고객 등록 및 마케팅 동의 시 익월 지급)</p>
-          
+
           <div class="event-notice">
             <p class="event-notice-title">이벤트 유의사항</p>
-            <p class="event-notice-text">-네이버페이 1만원은 안심여행 가이드 브리핑 통화가 완료된 고객에게 익월 중 지급됩니다. (고객 등록 및 마케팅 수신 동의 필수) <br>-이벤트 혜택은 1인 1회 제공되며, 중복 참여 및 중복 지급은 제한됩니다. <br>-지급 일정 및 세부 기준은 내부 운영 정책에 따릅니다.</p>
+            <p class="event-notice-text">
+              - 네이버페이 1만원은 안심여행 가이드 브리핑 통화가 완료된 고객에게 익월 중 지급됩니다. (고객 등록 및 마케팅 수신 동의 필수)<br>
+              - 이벤트 혜택은 1인 1회 제공되며, 중복 참여 및 중복 지급은 제한됩니다.<br>
+              - 지급 일정 및 세부 기준은 내부 운영 정책에 따릅니다.
+            </p>
           </div>
         </div>
       </div>
 
       <div class="sticky-cta">
-        <button class="btn-main" type="button" onclick="changeStep('view-q1')">👇 퀴즈 풀고 내 안심 점수 확인하기</button>
+        <button class="btn-main" type="button" onclick="changeStep('view-q1')">👇 3문제 풀고 내 안심 점수 확인하기</button>
       </div>
     </div>
 
+    <!-- STEP 3 Q1 -->
     <div id="view-q1" class="step-view">
       <div class="quiz-container">
         <p class="quiz-progress">문제 1 / 3</p>
@@ -290,9 +552,10 @@
           </div>
           <div class="explanation" id="exp1">
             <b>정답은 ⭕입니다!</b>
-            "설마 껌 가지고?" 싶지만 진짜입니다. 외국은 이렇듯 우리 상식과 전혀 다른 현지 법과 문화가 생각보다 대단히 많습니다.<br><br>
-            <mark>더 소름 돋는 반전은, 해외여행보험을 가입했더라도 해외 현지 병원에서 치료를 받았을 때 '카드 영수증' 한 장만 달랑 챙겨 귀국하면 보험금을 한 푼도 못 받을 수 있다는 사실!</mark><br><br>
-            해외여행보험으로 보험금을 청구할 때 병원 이름과 질병 코드가 기재된 <b style="display:inline; color:#191f28;">의사 진단서</b>와 치료 내역이 기재된 <b style="display:inline; color:#191f28;">세부 내역서</b>를 현지에서 발급받으셔야 합니다. <br>내 돈 아끼는 <b style="display:inline; color:#3182f6;">'해외여행보험 보험금 청구서류 핵심 꿀팁'</b>을 출국 전 반드시 숙지하세요!
+            생각보다 해외에는 우리와 다른 현지 법과 문화가 많습니다. 그래서 여행 중 예상치 못한 상황이 생겨도 당황하지 않도록 미리 준비가 필요합니다.<br><br>
+            <mark>특히 병원 진료나 사고가 생겼을 때는, 보험금 청구 시 꼭 알아야 할 포인트를 미리 알고 있는지가 중요합니다.</mark><br><br>
+            출국 전에 알아두면 내 시간도 아끼고, 놓치는 보장도 줄일 수 있습니다.<br><br>
+            수호천사가 <b style="display:inline; color:#3182f6;">해외여행보험 보험금 청구 팁</b>을 알기 쉽게 설명해 드립니다.
           </div>
         </div>
       </div>
@@ -301,20 +564,22 @@
       </div>
     </div>
 
+    <!-- STEP 4 Q2 -->
     <div id="view-q2" class="step-view">
       <div class="quiz-container">
         <p class="quiz-progress">문제 2 / 3</p>
         <div class="quiz-card">
-          <p class="quiz-question">Q2. 해외여행 중 생긴 질병은 한국에 돌아와서 치료받아도 여행자보험으로 계속 보장된다?</p>
+          <p class="quiz-question">Q2. 해외여행보험에 가입했더라도, 출국 전 내가 가진 보험의 보장 공백은 한 번 더 점검해야 한다?</p>
           <div class="btn-group">
             <button class="quiz-btn q-btn-2" type="button" onclick="selectAnswer(2, 'O', this)">O</button>
             <button class="quiz-btn q-btn-2" type="button" onclick="selectAnswer(2, 'X', this)">X</button>
           </div>
           <div class="explanation" id="exp2">
-            <b>정답은 ❌입니다!</b>
-            해외여행보험은 <mark>비행기가 한국 공항에 착륙하는 순간, 혹은 보험청약서에 기재된 보험기간 종료일이 지나면 보장이 종료</mark>됩니다.<br><br>
-            현지에서 물을 잘못 마셔 장염에 걸렸거나, 돌에 넘어져 뼈가 금이 간 상태로 비행기를 탔다면? 귀국 후에 필요한 장기간의 통원 치료, 입원, 수술비는 해외여행보험 외에 내가 가지고 있는 보험으로 보장 받아야 할 수도 있습니다.<br><br>
-            귀국길에 마주할 뜻밖의 병원비 폭탄을 막으려면, <b style="display:inline; color:#3182f6;">'내가 가지고 있는 보험의 보장 틈새와 공백'</b>을 여행 출발 전 미리 점검하셔야 합니다.
+            <b>정답은 ⭕입니다!</b>
+            해외여행보험은 든든한 안전장치이지만, 그것만으로 모든 상황이 완벽하게 채워지지는 않습니다.<br><br>
+            <mark>여행 중 발생한 질병이나 사고라도 귀국 후 치료가 장기간 이어지면, 해외여행보험 보장이 종료되어 내가 기존에 가입한 보험으로 대비해야 하는 경우가 생길 수 있습니다.</mark><br><br>
+            그래서 출국 전에는 해외여행보험 가입 여부만 확인할 것이 아니라, 내가 이미 가지고 있는 보험의 보장 범위와 공백까지 한 번 더 점검하는 것이 중요합니다.<br><br>
+            수호천사가 <b style="display:inline; color:#3182f6;">여행 전 꼭 확인해야 할 보장 체크포인트</b>를 알기 쉽게 안내해 드립니다.
           </div>
         </div>
       </div>
@@ -323,19 +588,22 @@
       </div>
     </div>
 
+    <!-- STEP 5 Q3 -->
     <div id="view-q3" class="step-view">
       <div class="quiz-container">
         <p class="quiz-progress">문제 3 / 3</p>
         <div class="quiz-card">
-          <p class="quiz-question">Q3. 과거에 유학, 출장 등으로 3개월 이상 해외에 체류했더라도 그동안 납입한 국내 실손보험료는 돌려받을 수 없다?</p>
+          <p class="quiz-question">Q3. 유학, 출장 등으로 3개월 이상 해외에 체류했다면, 그 기간 동안 납입한 국내 실손보험료는 환급받을 수 없다?</p>
           <div class="btn-group">
             <button class="quiz-btn q-btn-3" type="button" onclick="selectAnswer(3, 'O', this)">O</button>
             <button class="quiz-btn q-btn-3" type="button" onclick="selectAnswer(3, 'X', this)">X</button>
           </div>
           <div class="explanation" id="exp3">
             <b>정답은 ❌입니다!</b>
-            이번 출국이 유학, 장기 주재원 파견, 워킹홀리데이 혹은 한 달 살기 연장이신가요? 아니면 과거에 <mark>연속 3개월(90일) 이상 해외에 체류</mark>한 적이 있으신가요? 그렇다면 지갑을 지킬 기회입니다.<br><br>
-            실손보험료 환급제도는 90일 이상 해외 체류 기간 동안 국내에서 불필요하게 납부되었던 실손보험 보험료를 환급받을 수 있는 제도입니다. (2009년 9월 이후 가입 실손보험 기준).<br><br>고객님께<b style="display:inline; color:#3182f6;"> '실손보험료 환급제도와, 보험료 환급 방법'</b>을 알기쉽게 안내해 드립니다.
+            연속 <mark>3개월(90일) 이상 해외에 체류</mark>했다면, 그 기간 동안 납부한 국내 실손보험료를 환급받을 수 있는 경우가 있습니다.<br><br>
+            오래 해외에 머문 기간이 있었다면, 내가 모르고 지나친 환급금이 있을 수도 있다는 뜻입니다.<br><br>
+            출국 전이나 귀국 후 한 번만 확인해도 놓친 보험료를 돌려받을 기회가 생길 수 있습니다.<br><br>
+            수호천사가 <b style="display:inline; color:#3182f6;">실손보험료 환급제도와 환급 방법</b>을 알기 쉽게 안내해 드립니다.
           </div>
         </div>
       </div>
@@ -344,6 +612,7 @@
       </div>
     </div>
 
+    <!-- STEP 6 LOADING -->
     <div id="view-loading" class="step-view">
       <div class="loading-container">
         <div class="spinner"></div>
@@ -352,10 +621,11 @@
       </div>
     </div>
 
+    <!-- STEP 7 RESULT -->
     <div id="view-result" class="step-view">
       <div class="main-container">
         <div class="result-container">
-          
+
           <div class="result-header-compact">
             <div class="result-score-block">
               <span class="result-score-badge">진단 결과</span>
@@ -365,38 +635,38 @@
             <p class="result-grade-desc" id="grade-desc-display">-</p>
           </div>
 
-          <p class="section-title-compact">출국 전 꼭 확인해야 할 안심 가이드 </p>
-          <p class="section-desc-compact">수호천사가 더 안전하고 즐거운 여행을 위해 완벽 가이드를 해드립니다.</p>
-          
+          <p class="section-title-compact">출국 전 꼭 확인해야 할 안심 가이드</p>
+          <p class="section-desc-compact">수호천사가 꼭 필요한 내용을 정리해 쉽고 빠르게 안내해드립니다.</p>
+
           <div class="solution-list-compact">
             <div class="sol-row">
               <span class="sol-row-icon">📝</span>
               <div class="sol-content-box">
-                <span class="sol-row-text">해외여행보험 보험금 청구 필수 서류 안내</span>
-                <span class="sol-row-subtext">해외여행보험으로 보험금을 청구할 때 필요한 정보와 필수 서류 등을 자세하게 알려드려요.</span>
+                <span class="sol-row-text">해외여행보험 보험금 청구 팁 안내</span>
+                <span class="sol-row-subtext">해외에서 당황하지 않도록, 보험금 청구 전에 꼭 알아야 할 핵심 포인트를 알려드려요.</span>
               </div>
             </div>
             <div class="sol-row">
               <span class="sol-row-icon">🔍</span>
               <div class="sol-content-box">
                 <span class="sol-row-text">여행 전/후 나의 보장 공백 안심 점검</span>
-                <span class="sol-row-subtext"> 나의 보장 공백을 꼼꼼하게 점검받고, 더욱 안전한 여행을 준비해보세요.</span>
+                <span class="sol-row-subtext">여행 중은 물론 귀국 후까지 생각한 보장 공백을 꼼꼼하게 점검해 드려요.</span>
               </div>
             </div>
             <div class="sol-row">
               <span class="sol-row-icon">💰</span>
               <div class="sol-content-box">
                 <span class="sol-row-text">실손보험료 환급제도 안내</span>
-                <span class="sol-row-subtext">실손보험료 제도부터 보험료 환급 방법 등을 자세하게 알려드려요.(2009년 9월 이후 가입자 대상)</span>
+                <span class="sol-row-subtext">놓치기 쉬운 환급 가능 여부와 신청 방법까지 자세하게 알려드려요. (2009년 9월 이후 가입자 대상)</span>
               </div>
             </div>
           </div>
 
           <div class="reward-footer-optimized">
             <span class="tw-badge">트래블월렛 고객 특별 혜택! ✨</span>
-            <p class="reward-sub-title">수호천사 안심여행 가이드를 받으면</p>
+            <p class="reward-sub-title">수호천사 안심여행 가이드를 신청하면</p>
             <p class="reward-cash">여행지원금 10,000원 지급</p>
-            
+
             <div class="npay-card-wrapper">
               <div class="npay-logo">N Pay<span>포인트</span></div>
               <div class="npay-value">
@@ -404,11 +674,16 @@
                 <span class="val-num">10,000 원</span>
               </div>
             </div>
+
             <p class="reward-condition-text">(고객 등록 및 마케팅 동의 시 익월 지급)</p>
-            
+
             <div class="event-notice">
               <p class="event-notice-title">이벤트 유의사항</p>
-              <p class="event-notice-text">-네이버페이 1만원은 안심여행 가이드 브리핑 통화가 완료된 고객에게 익월 중 지급됩니다. (고객 등록 및 마케팅 수신 동의 필수) <br>-이벤트 혜택은 1인 1회 제공되며, 중복 참여 및 중복 지급은 제한됩니다. <br>-지급 일정 및 세부 기준은 내부 운영 정책에 따릅니다.</p>
+              <p class="event-notice-text">
+                - 네이버페이 1만원은 안심여행 가이드 브리핑 통화가 완료된 고객에게 익월 중 지급됩니다. (고객 등록 및 마케팅 수신 동의 필수)<br>
+                - 이벤트 혜택은 1인 1회 제공되며, 중복 참여 및 중복 지급은 제한됩니다.<br>
+                - 지급 일정 및 세부 기준은 내부 운영 정책에 따릅니다.
+              </p>
             </div>
           </div>
         </div>
@@ -422,55 +697,23 @@
   </div>
 
   <script>
-    // 구형 브라우저 호환성을 위한 ES5 표준 문법(var) 유지
     var userAnswers = { 1: null, 2: null, 3: null };
-    var correctAnswers = { 1: 'O', 2: 'X', 3: 'X' };
+    var correctAnswers = { 1: 'O', 2: 'O', 3: 'X' };
     var historyStack = ['view-intro'];
 
-    // [아이폰 사파리 차단 해결] 인트로 3초 로딩 완료 후 무조건 메인 화면 전환 안전 기틀 마련
-    function initIntroTimeout() {
-      var hasMoved = false;
-      
-      function tokenMove() {
-        if (!hasMoved) {
-          hasMoved = true;
-          changeStep('view-main');
-        }
-      }
-
-      // 1. 문서 로딩 상태에 연동 처리
-      if (document.readyState === 'complete') {
-        setTimeout(tokenMove, 3000);
-      } else {
-        window.addEventListener('load', function() {
-          setTimeout(tokenMove, 2500);
-        });
-      }
-
-      // 2. 이중 안전 잠금장치: 어떤 예외로든 브라우저가 정지해있을 경우 3.5초 후 강제 구동
-      setTimeout(tokenMove, 3500);
-    }
-
-    initIntroTimeout();
+    window.addEventListener('DOMContentLoaded', function() {
+      setTimeout(function() {
+        changeStep('view-main');
+      }, 3000);
+    });
 
     function changeStep(nextStepId) {
       var views = document.querySelectorAll('.step-view');
       for (var i = 0; i < views.length; i++) {
         views[i].classList.remove('active');
-        views[i].style.display = 'none'; // 구형 iOS Webview 비동기 화면 숨김 버그 방지
       }
-      
-      var nextView = document.getElementById(nextStepId);
-      if (nextView) {
-        nextView.classList.add('active');
-        nextView.style.display = 'block'; // 렌더링 강제 명령 보장
-        
-        // 사파리 순간 이동 좌표 고착 스크롤 패치
-        setTimeout(function() {
-          window.scrollTo(0, 0);
-        }, 10);
-      }
-
+      document.getElementById(nextStepId).classList.add('active');
+      window.scrollTo(0, 0);
       if (historyStack[historyStack.length - 1] !== nextStepId) {
         historyStack.push(nextStepId);
       }
@@ -480,16 +723,21 @@
       if (historyStack.length > 1) {
         historyStack.pop();
         var previousStep = historyStack[historyStack.length - 1];
-        changeStep(previousStep);
+        var views = document.querySelectorAll('.step-view');
+        for (var i = 0; i < views.length; i++) {
+          views[i].classList.remove('active');
+        }
+        document.getElementById(previousStep).classList.add('active');
+        window.scrollTo(0, 0);
       }
     }
 
     function selectAnswer(qNum, value, btn) {
-      if (userAnswers[qNum] !== null) return; 
+      if (userAnswers[qNum] !== null) return;
 
       userAnswers[qNum] = value;
       var buttons = document.querySelectorAll('.q-btn-' + qNum);
-      
+
       for (var i = 0; i < buttons.length; i++) {
         if (buttons[i] === btn) {
           buttons[i].classList.add('selected');
@@ -499,22 +747,19 @@
       }
 
       var targetExp = document.getElementById('exp' + qNum);
-      if (targetExp) {
-        targetExp.style.display = 'block';
-        document.getElementById('next-btn-' + qNum).removeAttribute('disabled');
+      targetExp.style.display = 'block';
+      document.getElementById('next-btn-' + qNum).removeAttribute('disabled');
 
-        setTimeout(function() {
-          if (typeof targetExp.scrollIntoView === 'function') {
-            targetExp.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-          }
-        }, 150);
-      }
+      setTimeout(function() {
+        if (typeof targetExp.scrollIntoView === 'function') {
+          targetExp.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      }, 150);
     }
 
     function startLoading() {
       changeStep('view-loading');
       calculateScore();
-      // 사후 분석 연출 시간 연장 패치 완료 (기존 1.5초 -> 최종 2.5초 대기)
       setTimeout(function() {
         changeStep('view-result');
       }, 2500);
@@ -532,10 +777,10 @@
 
       if (score === 100) {
         title.innerText = '준비 만점 트래블 마스터 ✈️';
-        desc.innerText = '여행 상식이 정말 풍부하시네요! 하지만 아는 것과 실제 내 지갑을 지키는 것은 다릅니다. 보험금 청구 꿀팁, 보장 공백 예방, 실손보험료 환급제도 등 맞춤형 안심 가이드로 최종 점검받아보세요.';
+        desc.innerText = '여행 상식이 정말 풍부하시네요! 하지만 아는 것과 실제 내 지갑을 지키는 것은 다릅니다. 보험금 청구 팁, 보장 공백 예방, 실손보험료 환급제도 등 맞춤형 안심 가이드로 최종 점검받아보세요.';
       } else if (score >= 66) {
         title.innerText = '아슬아슬 스마트 여행자 ⚠️';
-        desc.innerText = '기본적인 준비는 훌륭하지만, 귀국 후 발생할 보장 빈틈이나 해외여행보험 보험금 청구 Tip이나 놓치기 쉬운 실손보험 환급금 제도를 완벽히 챙기지 못하셨어요. 수호천사 안심 가이드로 꼼꼼하게 채워보세요.';
+        desc.innerText = '기본적인 준비는 훌륭하지만, 귀국 후 발생할 보장 빈틈이나 해외여행보험 보험금 청구 팁, 놓치기 쉬운 실손보험 환급금 제도를 완벽히 챙기지 못하셨어요. 수호천사 안심 가이드로 꼼꼼하게 채워보세요.';
       } else {
         title.innerText = '보장 공백 비상 상태 🚨';
         desc.innerText = '지금 이대로 출국하시면 위험해요! 다행히 비행기 타기 전이니 늦지 않았습니다. 수호천사가 약속드리는 안심 가이드로 확실한 안전 장치를 마련해 보세요.';
@@ -548,3 +793,4 @@
   </script>
 </body>
 </html>
+  
