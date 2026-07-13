@@ -58,9 +58,8 @@
     /* STEP 1 */
     .intro-container {
       position: fixed;
-      top: 10px;
+      top: 70px; /* 헤더 높이만큼 아래로 내려서 고정 */
       left: 50%;
-      transform: translateX(-50%);
       width: 100%;
       max-width: 680px;
       height: calc(100vh - 70px);
@@ -71,7 +70,11 @@
       background: linear-gradient(180deg, #f0f7ff 0%, #ffffff 100%);
       padding: 24px;
       text-align: center;
+      /* iOS 사파리 초기 렌더링 흰 화면 방지 및 하드웨어 가속 */
+      -webkit-transform: translate3d(-50%, 0, 0);
+      transform: translate3d(-50%, 0, 0);
     }
+
 
     .airplane-stage { position: relative; width: 120px; height: 120px; margin-bottom: 24px; }
     .airplane-icon { font-size: 56px; position: absolute; left: 25px; top: 20px; animation: takeOff 3s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
@@ -716,11 +719,25 @@
     var correctAnswers = { 1: 'O', 2: 'O', 3: 'X' };
     var historyStack = ['view-intro'];
 
-    window.addEventListener('DOMContentLoaded', function() {
+        // 화면 전환이 중복으로 일어나는 것을 방지하기 위한 플래그
+    var isStepChanged = false;
+
+    function startIntroTimer() {
+      if (isStepChanged) return;
+      isStepChanged = true;
+      
+      // 인트로 안니메이션을 보여주기 위해 2.5초 후 메인으로 전환
       setTimeout(function() {
         changeStep('view-main');
-      }, 3000);
-    });
+      }, 2500);
+    }
+
+    // 상황 1. 이미지, 폰트 등 모든 리소스 로드가 완료되면 즉시 타이머 시작
+    window.addEventListener('load', startIntroTimer);
+
+    // 상황 2. 첫 접속이라 로딩이 너무 길어져 3초간 load가 안 되더라도 강제 실행 (흰 화면 방지 안전장치)
+    setTimeout(startIntroTimer, 3000);
+
 
     function changeStep(nextStepId) {
       var views = document.querySelectorAll('.step-view');
