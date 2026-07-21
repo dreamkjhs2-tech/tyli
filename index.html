@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <title>출국 전 마지막 체크리스트</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -55,47 +55,7 @@
     .step-view { display: none; width: 100%; }
     .step-view.active { display: block; }
 
-    /* STEP 1 */
-    .intro-container {
-      position: fixed;
-      top: 70px; /* 헤더 높이만큼 아래로 내려서 고정 */
-      left: 50%;
-      width: 100%;
-      max-width: 680px;
-      height: calc(100vh - 70px);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(180deg, #f0f7ff 0%, #ffffff 100%);
-      padding: 24px;
-      text-align: center;
-      /* iOS 사파리 초기 렌더링 흰 화면 방지 및 하드웨어 가속 */
-      -webkit-transform: translate3d(-50%, 0, 0);
-      transform: translate3d(-50%, 0, 0);
-    }
-
-
-    .airplane-stage { position: relative; width: 120px; height: 120px; margin-bottom: 24px; }
-    .airplane-icon { font-size: 56px; position: absolute; left: 25px; top: 20px; animation: takeOff 3s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
-
-    @keyframes takeOff {
-      0% { transform: translate(0, 40px) scale(0.8) rotate(0deg); opacity: 0; }
-      20% { transform: translate(0, 20px) scale(1) rotate(-5deg); opacity: 1; }
-      50% { transform: translate(15px, -10px) scale(1.1) rotate(-10deg); }
-      85% { transform: translate(40px, -40px) scale(1) rotate(-5deg); opacity: 1; }
-      100% { transform: translate(120px, -120px) scale(0.7) rotate(0deg); opacity: 0; }
-    }
-
-    .intro-title { font-size: 24px; font-weight: 800; line-height: 1.45; margin-bottom: 16px; animation: fadeInText 0.8s ease-out forwards; }
-    .intro-desc { font-size: 16px; color: #4e5968; line-height: 1.6; margin-bottom: 40px; }
-    .progress-track { width: 200px; height: 4px; background: #e5e8eb; border-radius: 2px; overflow: hidden; }
-    .progress-fill { width: 0%; height: 100%; background: #3182f6; border-radius: 2px; animation: fillBar 3s linear forwards; }
-
-    @keyframes fillBar { to { width: 100%; } }
-    @keyframes fadeInText { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-    /* STEP 2 */
+    /* STEP 2 MAIN (첫 진입 화면 고정) */
     .main-container { padding-bottom: 180px; }
 
     .hero {
@@ -458,22 +418,8 @@
       <button class="header-share" type="button"> </button>
     </header>
 
-    <!-- STEP 1 -->
-    <div id="view-intro" class="step-view active">
-      <div class="intro-container">
-        <div class="airplane-stage">
-          <div class="airplane-icon">✈️</div>
-        </div>
-        <h1 class="intro-title">고객님의 안전한 여행을 위해<br>안심여행 체크리스트를 만드는 중...</h1>
-        <p class="intro-desc">환전은 100점, 그렇다면 나의 '안심여행 점수'는 몇 점일까요?</p>
-        <div class="progress-track">
-          <div class="progress-fill"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- STEP 2 MAIN -->
-    <div id="view-main" class="step-view">
+    <!-- STEP 2 MAIN (첫 화면으로 설정) -->
+    <div id="view-main" class="step-view active">
       <div class="main-container">
         <div class="hero">
           <span class="d-day">✈️ 출국 전 안심 체크</span>
@@ -717,27 +663,7 @@
   <script>
     var userAnswers = { 1: null, 2: null, 3: null };
     var correctAnswers = { 1: 'O', 2: 'O', 3: 'X' };
-    var historyStack = ['view-intro'];
-
-        // 화면 전환이 중복으로 일어나는 것을 방지하기 위한 플래그
-    var isStepChanged = false;
-
-    function startIntroTimer() {
-      if (isStepChanged) return;
-      isStepChanged = true;
-      
-      // 인트로 안니메이션을 보여주기 위해 2.5초 후 메인으로 전환
-      setTimeout(function() {
-        changeStep('view-main');
-      }, 2500);
-    }
-
-    // 상황 1. 이미지, 폰트 등 모든 리소스 로드가 완료되면 즉시 타이머 시작
-    window.addEventListener('load', startIntroTimer);
-
-    // 상황 2. 첫 접속이라 로딩이 너무 길어져 3초간 load가 안 되더라도 강제 실행 (흰 화면 방지 안전장치)
-    setTimeout(startIntroTimer, 3000);
-
+    var historyStack = ['view-main'];
 
     function changeStep(nextStepId) {
       var views = document.querySelectorAll('.step-view');
@@ -794,7 +720,7 @@
       calculateScore();
       setTimeout(function() {
         changeStep('view-result');
-      }, 2500);
+      }, 2000);
     }
 
     function calculateScore() {
@@ -825,4 +751,3 @@
   </script>
 </body>
 </html>
-  
